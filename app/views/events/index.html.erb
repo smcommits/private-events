@@ -1,10 +1,12 @@
 <h2>All Events</h2>
 
-<% @events.each do |event| %>
-  <article>
-    <h3><%= event.title %></h3>
-    <small> <%= "Create by: #{event.creator.username}"%> </small>
-    <small> <%= "Event Date: #{event.event_date}" %></small>
-    <p> <%= event.description %>
-  </article>
-<% end%>
+<h3>Past events </h3>
+
+<% @past_events.each do |event| %>
+ <%= render partial: 'layouts/event', locals: {event: event} %>
+<% end %>
+
+<h3> Upcoming events </h3>
+<% @future_events.each do |event| %>
+    <%= render partial: 'layouts/event', locals: {event: event} %>
+<% end %>
