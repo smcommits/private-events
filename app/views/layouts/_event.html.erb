@@ -1,7 +1,8 @@
-<article>
-  <h3><%= event.title%> </h3>
-  <small><%= event.event_date%> </small>
-  <p><%= event.description%> </p>
-  
-
-</article>
+<div class="card mt-2 w-100" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%=event.title%></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%=event.event_date%></h6>
+    <p class="card-text"><%=event.description%></p>
+    <a href="#" class="card-link"><%= link_to "Learn More", event_path(id: event.id) %></a>
+  </div>
+</div>

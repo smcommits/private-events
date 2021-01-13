@@ -9,7 +9,7 @@
       <%end%>
     </div>
   </div>
-  <hr>
+
   <div class="container mt-3">
   <h3 class="fw-bold">Attending</h3>
   <div class="row mt-2">
@@ -18,13 +18,9 @@
 
       <div>
         <h3>Previously Attended Events</h3>
-        <%past_events = @user.attended_events.past %>
-        <%if past_events.empty?%>
-          <div class="alert alert-secondary" role="alert">
-            User has attended no events in the past
-          </div>
-        <%else%>
-          <% past_events.each do |event| %>
+        <%= past_events = @user.attended_events.past %>
+        <% @user.attended_events.each do |event| %>
+          <% if event.event_date.past? %>
             <%= render partial: "layouts/event", locals: {event: event} %>
           <%end%>
         <%end%>
@@ -36,13 +32,8 @@
 
       <div>
         <h3>Upcoming Events</h3>
-        <%future_events = @user.attended_events.future %>
-        <%if future_events.empty?%>
-          <div class="alert alert-secondary" role="alert">
-            User has no upcoming events
-          </div>
-        <%else%>
-          <% future_events.each do |event| %>
+        <% @user.attended_events.each do |event| %>
+          <% if event.event_date.future? %>
             <%= render partial: "layouts/event", locals: {event: event} %>
           <%end%>
         <%end%>

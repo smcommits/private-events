@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htmlj
   resources :users
   resources :events, only: [:index, :new, :create, :show]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :events_attendees, only: [:create, :destroy]
+
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+
 
   root to: "events#index"
   

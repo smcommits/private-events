@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-
+  before_action :require_login, only: [:new, :create]
   def index
     @past_events = Event.past
     @future_events = Event.future
@@ -25,4 +25,5 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :event_date, :description)
   end
+
 end

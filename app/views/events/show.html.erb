@@ -1,10 +1,32 @@
-<p>Event</p>
+<div class="container">
+  <div class="row">
 
-<p><%= @event.creator.username %></p>
+    <div class="col-8">
+      <div class="p-3 mt-5 shadow mb-5 bg-white rounded ">
+        <h3 class="fw-bold text-capitalize"><%=@event.title%></h3>
+        <small class="fst-italics"><%=@event.event_date%></small>
+        <p class="lead"><%=@event.description%></p>
+        <% if EventAttendee.where("attendee_id = ? AND attended_event_id = ? ", session[:current_user_id], @event.id).exists? %>
+          <%= link_to "Cancel Attendance", events_attendee_path(event_id: @event.id), method: :delete , class: "btn btn-primary"%>
+        <% elsif logged_in?%>
+          <%= link_to "Attend", events_attendees_path(event_id: @event.id), method: :post, class: "btn btn-primary" %>
+        <% else %>
+          <p>Please Login To Attend</p>
+          <%= link_to "Login", login_path, class: "btn btn-primary"%>
+        <%end%>
+      </div>    
+    </div>
 
-<div>
-  <h3>Event Attendees</h3>
-  <% @event.attendees.each do |attendee| %>
-    <p><%= attendee.username%></p>
-  <%end%>
+    <div class="col-4">
+      <div class="p3 mt-5 shadow mb-5 bg-white rounded">
+        <h3 class="fw-bold text-capitalize p-2">Attendees</h3>
+
+        <ul class="list-group">
+      <% @event.attendees.each do |attendee| %>
+        <li class="list-group-item"><%= attendee.username%></li>
+      <%end%>
+      </ul>
+      </div>
+    </div>
+  </div>
 </div>
