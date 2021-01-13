@@ -1,16 +1,23 @@
+<div class="container mx-auto mt-5 shadow p-3 mb-5 bg-white rounded" >
 <h3>Create Event</h3>
 
+<div>
+
 <%= form_with model: @event do |f| %>
+  <div class="form-group">
   <%= f.label :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title, class: "form-control"%>
   
   <%= f.label :event_date %>
-  <%= f.text_field :event_date %>
+  <%= f.text_field :event_date, class: "form-control" %>
 
   <%= f.label :description %>
-  <%= f.text_field :description %>
+  <%= f.text_field :description, class: "form-control" %>
+  </div>
 
-  <%= f.submit "Create Event" %>
+  <%= f.submit "Create Event", class: "btn btn-primary" %>
 
   <%= @user.username %>
+  </div>
 <%end%>
+</div>
