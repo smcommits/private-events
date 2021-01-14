@@ -6,14 +6,8 @@
         <h3 class="fw-bold text-capitalize"><%=@event.title%></h3>
         <small class="fst-italics"><%=@event.event_date%></small>
         <p class="lead"><%=@event.description%></p>
-        <% if EventAttendee.where("attendee_id = ? AND attended_event_id = ? ", session[:current_user_id], @event.id).exists? %>
-          <%= link_to "Cancel Attendance", events_attendee_path(event_id: @event.id), method: :delete , class: "btn btn-primary"%>
-        <% elsif logged_in?%>
-          <%= link_to "Attend", events_attendees_path(event_id: @event.id), method: :post, class: "btn btn-primary" %>
-        <% else %>
-          <p>Please Login To Attend</p>
-          <%= link_to "Login", login_path, class: "btn btn-primary"%>
-        <%end%>
+        <%= display_invite_button(@event) %> 
+        <%= display_if_invited(@event) %>
       </div>    
     </div>
 
@@ -22,9 +16,9 @@
         <h3 class="fw-bold text-capitalize p-2">Attendees</h3>
 
         <ul class="list-group">
-      <% @event.attendees.each do |attendee| %>
-        <li class="list-group-item"><%= attendee.username%></li>
-      <%end%>
+          <% @event.attendees.each do |attendee| %>
+            <li class="list-group-item"><%= display_all_attendees(attendee, @event.id)%></li>
+          <%end%>
       </ul>
       </div>
     </div>

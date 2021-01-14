@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
 
   def new
     @user = User.new
@@ -6,7 +9,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    flash[:success] = "Sign Up successful, please login to continue!"
+    flash[:success] = 'Sign Up successful, please login to continue!'
     redirect_to login_path
   end
 

@@ -1,5 +1,8 @@
-<div class="container mt-5 mx-auto shadow p-3 mb-5 bg-white rounded">
+<div class=" container row mx-auto">
+<div class="col-8 mt-5 mx-auto shadow p-3 mb-5 bg-white rounded row">
+
   <div class="container">
+
     <h3 class="fw-bold">User Events</h3>
     <div class="row">
       <% @user.created_events.each do |event| %>
@@ -18,16 +21,7 @@
 
       <div>
         <h3>Previously Attended Events</h3>
-        <%past_events = @user.attended_events.past %>
-        <%if past_events.empty?%>
-          <div class="alert alert-secondary" role="alert">
-            User has attended no events in the past
-          </div>
-        <%else%>
-          <% past_events.each do |event| %>
-            <%= render partial: "layouts/event", locals: {event: event} %>
-          <%end%>
-        <%end%>
+        <%= display_past_events(User.find(session[:current_user_id])) %>
       </div>
 
     </div>
@@ -36,20 +30,25 @@
 
       <div>
         <h3>Upcoming Events</h3>
-        <%future_events = @user.attended_events.future %>
-        <%if future_events.empty?%>
-          <div class="alert alert-secondary" role="alert">
-            User has no upcoming events
-          </div>
-        <%else%>
-          <% future_events.each do |event| %>
-            <%= render partial: "layouts/event", locals: {event: event} %>
-          <%end%>
+        <%@user.attended_events.each do |event| %>
+          <%= display_upcoming_events(@user.id, event) %>
         <%end%>
       </div>
 
     </div>
 
+    
   </div>
 
+  
+  </div>
 </div>
+  
+  <div class="col-4 mt-5 mx-auto ">
+ 
+  <div class="shadow p-3 mb-5 bg-white rounded">
+      <%=render partial: 'users/request' %>
+  </div>
+  </div>
+</div>
+
