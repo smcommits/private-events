@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by_username(params[:username])
     if user
       session[:current_user_id] = user.id
-      flash.notice = "Loggin In!"
+      flash[:success] = "Successfully Logged In!"
       redirect_to root_path
     else
       flash.now[:alert] = "Username not found!"
@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
   def destroy
     session.delete(:current_user_id)
     @_current_user = nil
+    flash[:success] = "Successfully Logged Out!"
     redirect_to root_url
   end
 end

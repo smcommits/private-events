@@ -6,6 +6,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
+    flash[:success] = "Sign Up successful, please login to continue!"
+    redirect_to login_path
   end
 
   def show
