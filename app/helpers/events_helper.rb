@@ -1,6 +1,6 @@
 module EventsHelper
   def display_invite_button(event)
-    return if event.creator_id == session[:current_user_id]
+    return unless event.creator_id == session[:current_user_id]
 
     link_to 'Invite', users_path(event_id: @event.id), class: 'btn btn-primary'
   end
