@@ -17,6 +17,8 @@
 ## About
 This project contains a site similar to a private Eventbrite which allows users to create events and then manage user signups. Users can create events and send invitations. Other users can only attend events if they have invitation.
 
+![screenshot](./scrnshot.png)
+
 ## Live Demo
 
 ## Prerequisites
