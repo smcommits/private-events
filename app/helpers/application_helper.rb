@@ -25,4 +25,8 @@ module ApplicationHelper
   def display_logout
     link_to 'Log Out', logout_path, method: :delete, class: 'nav-link' if logged_in?
   end
+
+  def display_error(model)
+    render partial: 'layouts/errors', locals: { model: model } if model.errors.any?
+  end
 end
