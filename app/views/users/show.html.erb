@@ -5,7 +5,7 @@
 
     <h3 class="fw-bold">User Events</h3>
     <div class="row">
-      <% @user.created_events.each do |event| %>
+      <% @created_events.each do |event| %>
         <div class="col-6">
         <%= render partial: "layouts/event", locals: {event: event} %>
         </div>
@@ -21,7 +21,7 @@
 
       <div>
         <h3>Previously Attended Events</h3>
-        <%= display_past_events(User.find(session[:current_user_id])) %>
+        <%= display_past_events(@user) %>
       </div>
 
     </div>
@@ -30,9 +30,7 @@
 
       <div>
         <h3>Upcoming Events</h3>
-        <%@user.attended_events.each do |event| %>
-          <%= display_upcoming_events(@user.id, event) %>
-        <%end%>
+          <%= display_upcoming_events(@user) %>
       </div>
 
     </div>

@@ -29,9 +29,15 @@ module UsersHelper
     end
   end
 
-  def display_upcoming_events(user_id, event)
-    return unless EventAttendee.check_invitation(event.id, user_id, 1).exists?
-
-    render partial: 'layouts/event', locals: { event: event }
+  def display_upcoming_events(user)
+    if user.attended_events.future.empty?
+      render partial: 'users/alert', locals: { text: 'User has no upcoming events' }
+    else
+      user.attended_events.future.each do |event|
+        if EventAttendee.check_invitation(event.id, session[:current_user_id], 1).exists?
+          return render partial: 'layouts/event', locals: { event: event }
+        end
+      end
+    end
   end
 end
