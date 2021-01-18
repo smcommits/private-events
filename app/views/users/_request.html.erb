@@ -1,0 +1,11 @@
+<section>
+    <h3>Requests</h3>
+    <% invitations = EventAttendee.where("attendee_id = ? AND status = ?", user_id = session[:current_user_id], status = 0) %>
+    <% invitations.each do |invitation| %>
+      <% event = Event.find(invitation.attended_event_id) %>
+      <div class="d-flex justify-content-between">
+        <%= link_to event.title, event_path(event.id), class: "dropdown-item" %>
+        <%= link_to "Accept", events_attendee_url(invitation.id), method: :patch, class: "btn btn-primary"%>
+      </div>
+    <%end%>
+</section>

@@ -1,0 +1,9 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+.alert-error {
+  @extend .alert-warning;
+}
